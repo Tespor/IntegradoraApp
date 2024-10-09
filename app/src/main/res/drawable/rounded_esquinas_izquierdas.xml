@@ -1,0 +1,13 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Color de fondo -->
+    <solid android:color="#000000" />
+
+    <!-- Definir el radio de las esquinas redondeadas -->
+    <corners
+            android:topLeftRadius="50dp"
+            android:bottomLeftRadius="50dp"
+            android:topRightRadius="0dp"
+            android:bottomRightRadius="0dp" />
+</shape>
+
+
