@@ -48,4 +48,11 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    // Dependencies for ZXing
+    implementation(libs.zxing.android.embedded)
+    implementation(libs.androidx.appcompat.v130) // Usar la versión correcta
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }
