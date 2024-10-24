@@ -6,8 +6,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="14dp"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:paddingTop="22dp"
             android:paddingBottom="22dp"
             android:background="@drawable/rounded_box">
@@ -15,8 +15,8 @@
         <!-- Icono del titular -->
         <ImageView
                 android:id="@+id/icon_contenedor"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_marginStart="8dp"
                 android:src="@drawable/identificacion2"
                 app:layout_constraintStart_toStartOf="parent"
@@ -28,9 +28,9 @@
                 android:id="@+id/title_contenedor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TITULAR:"
+                android:text="MESES VENCIDOS"
                 android:textColor="#FFFFFF"
-                android:textSize="22sp"
+                android:textSize="20sp"
                 android:layout_marginStart="12dp"
                 android:layout_marginBottom="8dp"
                 android:fontFamily="sans-serif-medium"
@@ -52,17 +52,282 @@
 
         <!-- Nombre del titular -->
         <TextView
-                android:id="@+id/info_contenedor"
+                android:id="@+id/mesesVencidos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/lorem_ipsum"
+                android:text="Numero de meses vencidos"
                 android:textColor="#90FFFFFF"
                 android:textSize="16sp"
+                android:textAllCaps="true"
+                android:layout_marginLeft="15dp"
                 android:layout_marginTop="12dp"
-                android:textAlignment="center"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/divider_line" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="22dp"
+            android:paddingBottom="22dp"
+            android:background="@drawable/rounded_box">
+
+        <!-- Icono del titular -->
+        <ImageView
+                android:id="@+id/icon_contenedor2"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/identificacion2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+        <!-- Título "" -->
+        <TextView
+                android:id="@+id/title_contenedor2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TIPO DE CONTRATO"
+                android:textAllCaps="true"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:layout_marginStart="12dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/icon_contenedor2"
+                app:layout_constraintTop_toTopOf="@id/icon_contenedor2"
+                app:layout_constraintBottom_toBottomOf="@id/icon_contenedor2" />
+
+        <!-- Línea divisoria -->
+        <View
+                android:id="@+id/divider_line2"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:background="@color/bluelight"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/icon_contenedor2" />
+
+        <!-- Nombre del titular -->
+        <TextView
+                android:id="@+id/tipoContrato"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Comercial/Domestico"
+                android:textColor="#90FFFFFF"
+                android:textAllCaps="true"
+                android:textSize="16sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider_line2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="22dp"
+            android:paddingBottom="22dp"
+            android:background="@drawable/rounded_box">
+
+        <!-- Icono del titular -->
+        <ImageView
+                android:id="@+id/icon_contenedor3"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/identificacion2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+        <!-- Título "" -->
+        <TextView
+                android:id="@+id/title_contenedor3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CONSUMO PROMEDIO"
+                android:textAllCaps="true"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:layout_marginStart="12dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/icon_contenedor3"
+                app:layout_constraintTop_toTopOf="@id/icon_contenedor3"
+                app:layout_constraintBottom_toBottomOf="@id/icon_contenedor3" />
+
+        <!-- Línea divisoria -->
+        <View
+                android:id="@+id/divider_line3"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:background="@color/bluelight"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/icon_contenedor3" />
+
+        <!-- Nombre del titular -->
+        <TextView
+                android:id="@+id/consumoPromedio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CANTIDAD"
+                android:textColor="#90FFFFFF"
+                android:textAllCaps="true"
+                android:textSize="16sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider_line3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="22dp"
+            android:paddingBottom="22dp"
+            android:background="@drawable/rounded_box">
+
+        <!-- Icono del titular -->
+        <ImageView
+                android:id="@+id/icon_contenedor4"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/identificacion2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+        <!-- Título "" -->
+        <TextView
+                android:id="@+id/title_contenedor4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PROXIMO VENCIMIENTO"
+                android:textAllCaps="true"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:layout_marginStart="12dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/icon_contenedor4"
+                app:layout_constraintTop_toTopOf="@id/icon_contenedor4"
+                app:layout_constraintBottom_toBottomOf="@id/icon_contenedor4" />
+
+        <!-- Línea divisoria -->
+        <View
+                android:id="@+id/divider_line4"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:background="@color/bluelight"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/icon_contenedor4" />
+
+        <!-- Nombre del titular -->
+        <TextView
+                android:id="@+id/proxVencimiento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fecha"
+                android:textColor="#90FFFFFF"
+                android:textAllCaps="true"
+                android:textSize="16sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider_line4" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="22dp"
+            android:paddingBottom="22dp"
+            android:background="@drawable/rounded_box">
+
+        <!-- Icono del titular -->
+        <ImageView
+                android:id="@+id/icon_contenedor5"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/identificacion2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="MissingConstraints" />
+
+        <!-- Título "" -->
+        <TextView
+                android:id="@+id/title_contenedor5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CONSUMO DEL MES"
+                android:textAllCaps="true"
+                android:textColor="#FFFFFF"
+                android:textSize="20sp"
+                android:layout_marginStart="12dp"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@id/icon_contenedor5"
+                app:layout_constraintTop_toTopOf="@id/icon_contenedor5"
+                app:layout_constraintBottom_toBottomOf="@id/icon_contenedor5" />
+
+        <!-- Línea divisoria -->
+        <View
+                android:id="@+id/divider_line5"
+                android:layout_width="0dp"
+                android:layout_height="2dp"
+                android:background="@color/bluelight"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/icon_contenedor5" />
+
+        <!-- Nombre del titular -->
+        <TextView
+                android:id="@+id/consumoMes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="CANTIDAD"
+                android:textColor="#90FFFFFF"
+                android:textAllCaps="true"
+                android:textSize="16sp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/divider_line5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

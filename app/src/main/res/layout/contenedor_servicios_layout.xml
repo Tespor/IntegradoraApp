@@ -4,65 +4,160 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="14dp"
+            android:layout_height="match_parent"
             android:paddingLeft="12dp"
             android:paddingRight="12dp"
             android:paddingTop="22dp"
             android:paddingBottom="22dp"
-            android:background="@drawable/rounded_box">
+            android:background="@color/white">
 
-        <!-- Icono del titular -->
-        <ImageView
-                android:id="@+id/icon_contenedor"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/identificacion2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="MissingConstraints" />
 
-        <!-- Título "" -->
-        <TextView
-                android:id="@+id/title_contenedor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TITULAR:"
-                android:textColor="#FFFFFF"
-                android:textSize="22sp"
-                android:layout_marginStart="12dp"
-                android:layout_marginBottom="8dp"
-                android:fontFamily="sans-serif-medium"
-                android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@id/icon_contenedor"
-                app:layout_constraintTop_toTopOf="@id/icon_contenedor"
-                app:layout_constraintBottom_toBottomOf="@id/icon_contenedor" />
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:gravity="center"
+                      android:orientation="horizontal"
+                      android:weightSum="3"
+                      android:id="@+id/linearLayout3"
+                      app:layout_constraintTop_toTopOf="parent" tools:layout_editor_absoluteX="12dp"
+                      android:layout_marginTop="78dp">
 
-        <!-- Línea divisoria -->
-        <View
-                android:id="@+id/divider_line"
-                android:layout_width="0dp"
-                android:layout_height="2dp"
-                android:background="@color/bluelight"
-                android:layout_marginTop="8dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/icon_contenedor" />
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@drawable/rounded_box"
+                    android:layout_margin="8dp"
+                    android:padding="16dp"
+                    android:layout_gravity="center"
+                    android:elevation="4dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:backgroundTint="#00aefe"
+                    android:clipToOutline="true"
+                    android:backgroundTintMode="src_over"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground">
 
-        <!-- Nombre del titular -->
-        <TextView
-                android:id="@+id/info_contenedor"
+                <!-- Icono de Gas -->
+                <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/gas"/>
+
+                <!-- Texto Gas -->
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="GAS"
+                        android:textColor="#ffffff"
+                        android:textSize="16sp"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@drawable/rounded_box"
+                    android:layout_margin="8dp"
+                    android:padding="16dp"
+                    android:elevation="4dp"
+                    android:backgroundTint="#00aefe"
+                    android:clipToOutline="true"
+                    android:backgroundTintMode="src_over"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground">
+
+                <!-- Icono de Agua -->
+                <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/gota"/>
+
+                <!-- Texto Agua -->
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AGUA"
+                        android:textColor="#ffffff"
+                        android:textSize="16sp"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="@drawable/rounded_box"
+                    android:layout_margin="8dp"
+                    android:padding="16dp"
+                    android:elevation="4dp"
+                    android:backgroundTint="#00aefe"
+                    android:clipToOutline="true"
+                    android:backgroundTintMode="src_over"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?android:attr/selectableItemBackground">
+
+                <!-- Icono de Luz -->
+                <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/rayo"/>
+
+                <!-- Texto Luz -->
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="LUZ"
+                        android:textColor="#ffffff"
+                        android:textSize="16sp"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/lorem_ipsum"
-                android:textColor="#90FFFFFF"
-                android:textSize="16sp"
-                android:layout_marginTop="12dp"
-                android:textAlignment="center"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/divider_line" />
+                tools:layout_editor_absoluteX="1dp" android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@color/bluelight"
+                    android:layout_marginTop="8dp" tools:ignore="MissingConstraints"/>
+            <Button
+                    android:id="@+id/btnScan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/CustomButtonStyle2"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/rounded_button"
+                    android:text="Agregar servicio"/>
+            <!-- Spinner (DropdownList) -->
+            <Spinner
+                    android:id="@+id/mySpinner"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/rounded_button"
+                    android:layout_height="wrap_content"
+                    android:spinnerMode="dropdown"
+                    style="@style/CustomButtonStyle2"
+            />
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
