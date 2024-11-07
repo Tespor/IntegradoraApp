@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <androidx.constraintlayout.widget.ConstraintLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:padding="10dp"
+            android:layout_margin="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:ignore="MissingConstraints">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="DATOS DE LA CUENTA"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:alpha="0.8"
+                android:paddingTop="12dp"
+                android:paddingBottom="16dp"
+                android:textSize="16sp"/>
+        <View
+                android:id="@+id/divider_line2"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_margin="0dp"
+                android:background="@color/bluelight"/>
+
+        <!-- Meses Vencidos -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="12dp"
+                android:paddingTop="14dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:id="@+id/txtHeaderMV"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAllCaps="true"
+                    android:text="Meses vencidos:"
+                    android:alpha="0.8"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"/>
+
+            <!-- Texto de meses vencidos -->
+            <TextView
+                    android:id="@+id/txtMesesVencidos"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAllCaps="true"
+                    android:text="Numero de meses"
+                    android:alpha="0.8"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"/>
+        </LinearLayout>
+
+        <!-- Tipo de contrato -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:id="@+id/txtHeaderContrato"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAllCaps="true"
+                    android:text="Tipo de contrato:"
+                    android:alpha="0.8"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"/>
+
+            <!-- Texto de meses vencidos -->
+            <TextView
+                    android:id="@+id/txtTipoContrato"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAllCaps="true"
+                    android:text="Comercial/Domestico"
+                    android:alpha="0.8"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"/>
+        </LinearLayout>
+
+        <!-- Consumo Promedio -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:id="@+id/txtHeaderCPromedio"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAllCaps="true"
+                    android:text="Consumo Promedio:"
+                    android:alpha="0.8"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"/>
+
+            <!-- Texto de meses vencidos -->
+            <TextView
+                    android:id="@+id/txtConsumoPromedio"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAllCaps="true"
+                    android:text="Cantidad"
+                    android:alpha="0.8"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"/>
+        </LinearLayout>
+
+        <!-- Proximo vencimiento -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:id="@+id/txtHeaderPVencimiento"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAllCaps="true"
+                    android:text="Proximo vencimiento:"
+                    android:alpha="0.8"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"/>
+
+            <!-- Texto de meses vencidos -->
+            <TextView
+                    android:id="@+id/txtProximoVencimiento"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAllCaps="true"
+                    android:text="Fecha"
+                    android:alpha="0.8"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"/>
+        </LinearLayout>
+
+        <!-- Consumo del mes -->
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="12dp"
+                android:paddingTop="12dp"
+                android:orientation="horizontal">
+
+            <TextView
+                    android:id="@+id/txtHeaderCMes"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAllCaps="true"
+                    android:text="Consumo del mes:"
+                    android:alpha="0.8"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"/>
+
+            <!-- Texto de meses vencidos -->
+            <TextView
+                    android:id="@+id/txtConsumoMes"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:textAllCaps="true"
+                    android:text="Cantidad"
+                    android:alpha="0.8"
+                    android:textColor="@color/white"
+                    android:textSize="16dp"/>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>

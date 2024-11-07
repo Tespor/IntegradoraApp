@@ -5,17 +5,19 @@ import android.content.res.ColorStateList
 import android.graphics.Typeface
 import android.os.Bundle
 import android.text.InputType
+import android.text.Layout
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import com.example.appandroid.Utils
 
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,14 +33,23 @@ class LoginActivity : AppCompatActivity() {
         val btnIngresar: Button = findViewById(R.id.btn_ingresar)
         val btnRegistrar: TextView = findViewById(R.id.txtregistrar)
         val btnVer: ImageButton = findViewById(R.id.imgBtnOjo1)
-        val txtPass: EditText = findViewById(R.id.editTextTextPassword)
+        val txtPass: EditText = findViewById(R.id.txtPassword)
+        val txtUser: EditText = findViewById(R.id.txtUser)
         var passVisible: Boolean = false
+
+
 
         //codigo que se ejecuta al hacer clic en el boton ingresar
         btnIngresar.setOnClickListener(){
-            val intentNavegar = Intent(this, MainActivity::class.java)
-            startActivity(intentNavegar)
-            finish()
+
+            val username: String = txtUser.text.toString()
+            val password: String = txtPass.text.toString()
+
+            enviarLogin(this, username, password) { mensaje ->
+                //Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
+                showPopup(this, mensaje)
+            }
+
         }
         btnRegistrar.setOnClickListener(){
             val intentNavegar = Intent(this, RegistrarActivity::class.java)

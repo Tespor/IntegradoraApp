@@ -16,14 +16,13 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintEnd_toEndOf="parent" android:id="@+id/scrollView2">
 
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:gravity="center"
-                android:padding="16dp">
+                android:padding="0dp">
             <!--Separador entre el menu y el contenido-->
             <View android:layout_marginTop="60dp"
                   android:layout_width="match_parent"
@@ -33,85 +32,14 @@
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="DATOS DE LA CUENTA"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
-                    android:alpha="0.8"
-                    android:layout_marginBottom="12dp"
-                    android:textSize="16sp"/>
-
-            <include
-                    android:id="@+id/contenedor_titular"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    layout="@layout/contenedor_titular"/>
-
-            <Button
-                    android:id="@+id/btnPagar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/CustomButtonStyle2"
-                    android:layout_marginBottom="14dp"
-                    android:background="@drawable/rounded_button"
-                    android:text="PAGAR"/>
-            <Button
-                    android:id="@+id/btnPagarQR"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/CustomButtonStyle2"
-                    android:layout_marginBottom="14dp"
-                    android:background="@drawable/rounded_button"
-                    android:text="PAGAR CON QR"/>
-
-            <Button
-                    android:id="@+id/btnScan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    style="@style/CustomButtonStyle2"
-                    android:layout_marginBottom="14dp"
-                    android:background="@drawable/rounded_button"
-                    android:text="Escanear Código QR"/>
-
-            <TextView
-                    android:id="@+id/tvData1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Dato 1"
-                    style="@style/PanelStyle"
-                    android:textColor="@color/white"
-                    android:layout_marginTop="10dp"
-                    android:textSize="18sp"/>
-
-            <TextView
-                    android:id="@+id/tvData2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Dato 2"
-                    style="@style/PanelStyle"
-                    android:textColor="@color/white"
-                    android:layout_marginTop="10dp"
-                    android:textSize="18sp"/>
-
-            <TextView
-                    android:id="@+id/tvData3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Dato 3"
-                    style="@style/PanelStyle"
-                    android:textColor="@color/white"
-                    android:layout_marginTop="10dp"
-                    android:textSize="18sp"/>
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
                     android:text="Adeudo total:"
+                    android:textAllCaps="true"
                     android:textColor="@color/white"
                     android:layout_marginTop="10dp"
-                    android:textAlignment="textEnd"
+                    android:textAlignment="center"
                     android:textSize="26sp"
-                    android:alpha="0.8"
-                    android:layout_marginEnd="12dp"/>
+                    android:alpha="0.8"/>
+
             <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -119,14 +47,61 @@
                     android:textColor="@color/white"
                     android:textAllCaps="true"
                     android:textStyle="bold"
-                    android:textAlignment="textEnd"
-                    android:layout_marginEnd="12dp"
+                    android:textAlignment="center"
+                    android:layout_marginBottom="20dp"
                     android:alpha="0.8"
-                    android:textSize="38sp"/>
+                    android:textSize="44sp"/>
+
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          android:orientation="vertical"
+                          android:background="@color/blackalpha">
+
+                <include layout="@layout/datos_cuenta"/>
+
+            </LinearLayout>
+
         </LinearLayout>
+
 
     </ScrollView>
 
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="24dp"
+            tools:ignore="MissingConstraints" app:layout_constraintBottom_toBottomOf="@+id/scrollView2">
+
+        <Button
+                android:id="@+id/btnPagar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/CustomButtonStyle2"
+                android:layout_marginBottom="14dp"
+                android:background="@drawable/rounded_button"
+                android:text="PAGAR"/>
+
+        <Button
+                android:id="@+id/btnScan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/CustomButtonStyle2"
+                android:background="@drawable/rounded_button"
+                android:text="PAGAR CON QR"/>
+
+    </LinearLayout>
+
+    <include layout="@layout/ventana_pago_qr"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_marginTop="100dp"
+             android:layout_marginEnd="12dp"
+             android:layout_marginStart="12dp"/>
+
+    <!--Contenedor de -->
+    <include layout="@layout/contenedor_servicios_layout"/>
 
     <include layout="@layout/header_layout"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

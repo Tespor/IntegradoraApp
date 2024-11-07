@@ -7,6 +7,9 @@
     <color name="blue1">#0064a7</color>
     <color name="blue2">#1356a3</color>
     <color name="blackalpha">#90000000</color>
+    <color name="blackalphahigh">#E6000000</color>
     <color name="whitealpha">#50d8d8d8</color>
     <color name="colorAccent">#ff0000</color>
+    <color name="transparent">#02000000</color>
+    <color name="Warning">#FFCE00</color>
 </resources>

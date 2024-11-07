@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="estilos.css">
+</head>
+
+<body>
+<div class="MyContainer">
+    <nav>
+        <div class="ContentFluid LogoContent">
+            <img class="IconCompany" id="IconCompany" src="img/LOGO-LINE.png" alt="">
+            <img src="img/TEXTO-LOGO.png" class="img-titulo-head"></img>
+        </div>
+        <a class="perfil" href="Login.php">
+            <img class="IconUser" src="img/Icono Usuario.png" alt="">
+            <p class="userText">Usuario</p>
+        </a>
+    </nav>
+</div>
+
+<div class="container-cards">
+    <div class="main-row">
+        <div class="card">
+            <img src="img/gas.png" alt="Gas icon">
+            <p>GAS</p>
+        </div>
+        <div class="card">
+            <img src="img/gota.png" alt="Agua icon">
+            <p>AGUA</p>
+        </div>
+        <div class="card">
+            <img src="img/rayo.png" alt="Luz icon">
+            <p>LUZ</p>
+        </div>
+    </div>
+    <div class="divider"></div>
+    <button class="custom-button">Agregar servicio</button>
+    <select class="custom-spinner">
+        <option value="1">Opción 1</option>
+        <option value="2">Opción 2</option>
+    </select>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.11/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script>
+    const btnMenu = document.getElementById('IconCompany');
+    const Menu = document.querySelector('.container-cards');
+    var menuAbierto = false;
+
+    btnMenu.addEventListener('click', function(){
+        if (menuAbierto){
+            Menu.style.animation = "mostrar 0.6s forwards";
+            menuAbierto = false;
+            console.log("se abrio menu");
+        }
+        else{
+            Menu.style.animation = "guardar 0.6s forwards";
+            menuAbierto = true;
+            console.log("se cerro menu");
+        }
+    });
+</script>
+</body>
+</html>

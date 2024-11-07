@@ -11,19 +11,24 @@
 
     <ImageView
             android:layout_width="300dp"
-            android:layout_height="300dp" app:srcCompat="@drawable/logo_con_texto" android:id="@+id/LogoPPl"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="300dp"
+            app:srcCompat="@drawable/logo_con_texto" android:id="@+id/LogoPPl"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp" android:layout_marginTop="24dp"/>
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="24dp"/>
+
     <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:autofillHints="10"
             android:ems="10"
             android:hint="@string/Cuenta"
-            android:inputType="number"
+            android:inputType="text"
             style="@style/TextboxStyle"
             app:layout_constraintTop_toBottomOf="@+id/LogoPPl"
-            android:id="@+id/editTextText"
+            android:id="@+id/txtUser"
             tools:ignore="RtlSymmetry"
             tools:layout_editor_absoluteX="32dp"
             android:layout_marginTop="16dp"/>
@@ -35,8 +40,8 @@
             android:hint="@string/contrasenia"
             android:inputType="textPassword"
             style="@style/TextboxStyle"
-            app:layout_constraintTop_toBottomOf="@+id/editTextText"
-            android:id="@+id/editTextTextPassword"
+            app:layout_constraintTop_toBottomOf="@+id/txtUser"
+            android:id="@+id/txtPassword"
             tools:ignore="RtlSymmetry"/>
     <ImageButton
             android:layout_width="50dp"
@@ -49,8 +54,8 @@
             android:adjustViewBounds="true"
             android:padding="14dp"
             android:background="@drawable/rounded"
-            app:layout_constraintTop_toTopOf="@+id/editTextTextPassword"
-            app:layout_constraintStart_toStartOf="@+id/editTextTextPassword"
+            app:layout_constraintTop_toTopOf="@+id/txtPassword"
+            app:layout_constraintStart_toStartOf="@+id/txtPassword"
     />
 
     <ImageButton
@@ -64,8 +69,8 @@
             android:adjustViewBounds="true"
             android:padding="14dp"
             android:background="@drawable/rounded"
-            app:layout_constraintTop_toTopOf="@+id/editTextText"
-            app:layout_constraintStart_toStartOf="@+id/editTextText"
+            app:layout_constraintTop_toTopOf="@+id/txtUser"
+            app:layout_constraintStart_toStartOf="@+id/txtUser"
     />
     <ImageButton
             android:layout_width="42dp"
@@ -78,16 +83,17 @@
             android:adjustViewBounds="true"
             android:padding="10dp"
             android:background="#00000000"
-            app:layout_constraintTop_toTopOf="@+id/editTextTextPassword"
+            app:layout_constraintTop_toTopOf="@+id/txtPassword"
             android:layout_marginTop="3dp"
-            app:layout_constraintEnd_toEndOf="@+id/editTextTextPassword"
+            app:layout_constraintEnd_toEndOf="@+id/txtPassword"
             android:layout_marginEnd="4dp"/>
+
     <Button
             android:text="@string/ingresar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/btn_ingresar"
-            app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
+            app:layout_constraintTop_toBottomOf="@+id/txtPassword"
             style="@style/CustomButtonStyle"
             android:background="@drawable/rounded_button"
             android:layout_marginTop="32dp"/>
@@ -101,4 +107,41 @@
             android:layout_marginStart="24dp" app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="24dp" android:fontFamily="sans-serif" android:typeface="monospace"
             android:textSize="20sp" android:textColor="#73FFFFFF" android:textAlignment="center"/>
+
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  app:layout_constraintBottom_toBottomOf="parent"
+                  app:layout_constraintStart_toStartOf="parent"
+                  android:layout_marginBottom="24dp"
+                  android:background="@drawable/rounded"
+                  android:backgroundTint="@color/blackalpha"
+                  android:padding="4dp"
+                  android:orientation="horizontal"
+                  app:layout_constraintEnd_toEndOf="parent"
+                  android:layout_marginEnd="24dp"
+                  android:layout_marginStart="24dp">
+        <ImageButton
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                app:srcCompat="@drawable/icon_qr"
+                android:id="@+id/btnQR"
+                android:contentDescription="QR code scan"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:padding="10dp"
+                android:background="@drawable/rounded"
+                android:backgroundTint="@color/bluedark"/>
+        <TextView
+                android:text="Paga facil con QR"
+                android:textSize="22sp"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/textView4"/>
+
+    </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

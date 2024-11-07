@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout android:layout_width="match_parent"
-             android:layout_height="wrap_content" xmlns:android="http://schemas.android.com/apk/res/android">
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+                                                   android:layout_height="wrap_content" xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto">
     <LinearLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -16,9 +15,10 @@
             android:layout_marginStart="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="16dp"
-            android:id="@+id/linearLayout">
+            android:id="@+id/linearLayoutHeader">
 
         <LinearLayout
+                android:id="@+id/boxLogoText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/rounded_esquinas_izquierdas"
@@ -26,11 +26,13 @@
 
             <!-- Imagen a la izquierda -->
             <ImageView
-                    android:id="@+id/logoImg"
+                    android:id="@+id/logoCompany"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:src="@drawable/logo_conlineas"
                     android:layout_marginEnd="8dp"
+                    android:backgroundTint="@color/transparent"
+                    android:background="@drawable/rounded_button"
                     android:contentDescription="Logo"/>
 
             <ImageView
@@ -54,10 +56,99 @@
 
         <!-- Botón a la derecha -->
         <ImageView
-                android:id="@+id/user_button"
+                android:id="@+id/btnUserIcon"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:src="@drawable/icon_user"
                 android:padding="5dp"/>
     </LinearLayout>
-</FrameLayout>
+    <LinearLayout
+            android:orientation="vertical"
+            android:gravity="end"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:id="@+id/menuUser"
+            android:background="@drawable/bradius"
+            android:backgroundTint="@color/blackalphahigh"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayoutHeader"
+            tools:ignore="MissingConstraints"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="12dp"
+                android:paddingEnd="28dp"
+                android:paddingStart="28dp"
+                android:text="Nombre del Usuario"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"/>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:id="@+id/divide"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginBottom="6dp"
+                android:background="@color/bluelight"/>
+        <Button
+                android:id="@+id/btnBajaCuenta"
+                android:text="Dar de baja cuenta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="14dp"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textAlignment="textStart"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
+                android:layout_margin="0dp"
+                android:background="@drawable/quitar_estilos"
+                style="@style/ButtonHeader"/>
+        <Button
+                android:id="@+id/btnMetodoPago"
+                android:text="Metodos de pago"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="14dp"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textAlignment="textStart"
+                style="@style/ButtonHeader"
+                android:background="@drawable/quitar_estilos"
+                android:layout_margin="0dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"/>
+
+        <Button
+                android:id="@+id/btnCerrarSesion"
+                android:layout_marginBottom="14dp"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:text="Cerrar sesión"
+                android:textAlignment="textStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword"
+                style="@style/ButtonHeader"
+                android:background="@drawable/quitar_estilos"
+                android:layout_margin="0dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
