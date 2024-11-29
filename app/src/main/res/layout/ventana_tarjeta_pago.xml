@@ -1,85 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                                                   xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-                                                   android:layout_height="match_parent">
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        android:layout_gravity="center"
+        android:background="@color/blackalpha">
+
+    <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="AGREGA UNA TARJETA PARA PAGAR"
+            android:textSize="20sp"
+            android:textColor="#1E88E5"
+            android:textStyle="bold"
+            android:layout_gravity="center"/>
+
+    <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="#1E88E5"
+            android:layout_marginTop="8dp"/>
+
+    <EditText
+            android:id="@+id/etNumeroTarjeta"
+            android:layout_width="match_parent"
+            android:hint="Número de Tarjeta"
+            android:padding="12dp"
+            android:inputType="number"
+            android:textColorHint="#BDBDBD"
+            android:layout_height="48dp"
+            android:background="@drawable/rounded"
+            android:backgroundTint="@color/blackalphahigh"
+            style="@style/TextboxStyle2"
+            android:autofillHints="name"
+            android:ems="10"
+            android:layout_marginTop="12dp" android:textSize="16sp"/>
+
+    <EditText
+            android:id="@+id/etNombreTitular"
+            android:layout_width="match_parent"
+            android:hint="Nombre del Titular"
+            android:padding="12dp"
+            android:inputType="textPersonName"
+            android:textColorHint="#BDBDBD"
+            android:layout_height="48dp"
+            android:background="@drawable/rounded"
+            android:backgroundTint="@color/blackalphahigh"
+            style="@style/TextboxStyle2"
+            android:autofillHints="name"
+            android:ems="10"
+            android:layout_marginTop="12dp" android:textSize="16sp"/>
 
     <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="0dp">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
 
-
-        <TextView
-                android:text="fecha de vencimiento"
-                style="@style/Subtitulo"
-                android:paddingStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView"/>
         <EditText
-                android:id="@+id/tvData1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:autofillHints="10"
-                android:text="Dato 1"
+                android:id="@+id/etFechaVencimiento"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:hint="Fecha de Vencimiento"
+                android:inputType="date"
+                android:textColorHint="#BDBDBD"
+                android:layout_height="48dp"
+                android:background="@drawable/rounded"
+                android:backgroundTint="@color/blackalphahigh"
                 style="@style/TextboxStyle2"
-                android:textColor="@color/white"
-                android:layout_marginTop="10dp"
-                android:textSize="18sp"/>
+                android:autofillHints="name"
+                android:ems="10"
+                android:layout_marginTop="12dp" android:textSize="16sp"/>
 
-        <LinearLayout android:layout_width="wrap_content"
-                      android:layout_height="match_parent"
-                      android:orientation="horizontal">
-            <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:orientation="vertical">
-                <TextView
-                        android:text="cvv"
-                        style="@style/Subtitulo"
-                        android:paddingStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView2"
-                        tools:ignore="RtlSymmetry"/>
-                <EditText
-                        android:id="@+id/tvData2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:autofillHints="10"
-                        android:text="Dato 2"
-                        style="@style/TextboxStyle2"
-                        android:textColor="@color/white"
-                        android:layout_marginTop="10dp"
-                        android:textSize="18sp"/>
-            </LinearLayout>
-            <LinearLayout android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:orientation="vertical">
+        <Space
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"/>
 
-                <TextView
-                        android:text="fecha de vencimiento"
-                        style="@style/Subtitulo"
-                        android:paddingStart="16dp"
-                        android:layout_marginTop="16dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView3"
-                        tools:ignore="RtlSymmetry"/>
-                <EditText
-                        android:id="@+id/tvData3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:autofillHints="10"
-                        android:text="Dato 3"
-                        style="@style/TextboxStyle2"
-                        android:textColor="@color/white"
-                        android:layout_marginTop="10dp"
-                        android:textSize="18sp"/>
-            </LinearLayout>
+        <EditText
+                android:id="@+id/etCVV"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:hint="CVV"
+                android:background="@drawable/rounded"
+                android:backgroundTint="@color/blackalphahigh"
+                style="@style/TextboxStyle2"
+                android:inputType="numberPassword"
+                android:autofillHints="name"
+                android:ems="10"
+                android:layout_marginTop="12dp"
+                android:textColorHint="#BDBDBD" android:textSize="16sp"/>
 
-        </LinearLayout>
     </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+            android:id="@+id/btnPagar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PAGAR"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#1E88E5"
+            android:layout_marginTop="16dp"
+            android:padding="12dp"
+            style="@style/CustomButtonStyle2"
+            android:background="@drawable/rounded_button"/>
+</LinearLayout>

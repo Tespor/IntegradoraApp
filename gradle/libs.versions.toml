@@ -14,6 +14,7 @@ navigationUiKtx = "2.6.0"
 activity = "1.9.2"
 zxingAndroidEmbedded = "4.3.0"
 coreAnimation = "1.0.0"
+media3CommonKtx = "1.5.0"
 
 [libraries]
 androidx-appcompat-v130 = { module = "androidx.appcompat:appcompat", version.ref = "appcompatVersion" }
@@ -29,6 +30,7 @@ androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 zxing-android-embedded = { module = "com.journeyapps:zxing-android-embedded", version.ref = "zxingAndroidEmbedded" }
 androidx-core-animation = { group = "androidx.core", name = "core-animation", version.ref = "coreAnimation" }
+androidx-media3-common-ktx = { group = "androidx.media3", name = "media3-common-ktx", version.ref = "media3CommonKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

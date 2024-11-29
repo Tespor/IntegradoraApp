@@ -9,20 +9,12 @@ import android.os.Bundle
 import android.view.View
 import android.view.animation.TranslateAnimation
 import androidx.appcompat.app.AppCompatActivity
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
 import android.webkit.WebView
+import android.widget.*
 import com.example.appandroid.Utils
 import com.google.zxing.integration.android.IntentIntegrator
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var btnScan: Button
-    private lateinit var tvData1: TextView
-    private lateinit var tvData2: TextView
-    private lateinit var tvData3: TextView
 
     //menus activos e inactivos
     private var menuUserAbierto :Boolean = false
@@ -32,14 +24,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btnScan = findViewById(R.id.btnScan)
-        tvData1 = findViewById(R.id.txDataTitular)
-        tvData2 = findViewById(R.id.txDataCuenta)
-        tvData3 = findViewById(R.id.txDataMensualidad)
+        //Datos del usuario
+        val txtDireccion: TextView = findViewById(R.id.txtDireccion)
+        val txtEstadoServicio: TextView = findViewById(R.id.txtEstadoServicio)
+        val txtMesesAdeudados: TextView = findViewById(R.id.txtMesesAdeudados)
+        val txtAdudoMes: TextView = findViewById(R.id.txtAdudoMes)
+        val txtConsumoMes: TextView = findViewById(R.id.txtConsumoMes)
+        val txtConsumoPromedio: TextView = findViewById(R.id.txtConsumoPromedio)
+        val txtProximoVencimiento: TextView = findViewById(R.id.txtProximoVencimiento)
+        val txtTipoContrato: TextView = findViewById(R.id.txtTipoContrato)
+        val txtAdeudoTotal: TextView = findViewById(R.id.txtAdeudoTotal)
+        val txtNombre: TextView = findViewById(R.id.txtNombre)
 
-        btnScan.setOnClickListener {
-            iniciarEscaneoQR()
-        }
 
         //Abrir y cerrar menu de Servicios
         val logoCompany = findViewById<ImageView>(R.id.logoCompany)
@@ -50,16 +46,41 @@ class MainActivity : AppCompatActivity() {
         //variables para modificar el encabezado
         val boxLogoText = findViewById<View>(R.id.boxLogoText)
         val paddingFinal = (170 * resources.displayMetrics.density).toInt()
-
         //Menu de usuario
         val btnUserIcon = findViewById<ImageView>(R.id.btnUserIcon);
         // Cierra el menuUser al iniciar la app
         val menuUser = findViewById<View>(R.id.menuUser);
 
+        //Menu lateral
+        menuServ.visibility = View.VISIBLE
+
+        //................SPINNER................//
+        val SpinCuentas: Spinner = findViewById(R.id.ddlCuenta)
+
+        HacerPostCuentas(this) { cuentasList ->
+            // Aquí se recibe la lista de cuentas
+            println("Cuentas recibidas: $cuentasList")
+
+            val adapter = ArrayAdapter(
+                this, // Contexto (Activity o Fragment)
+                android.R.layout.simple_spinner_item, // Layout para los elementos del Spinner
+                cuentasList // La lista de datos
+            )
+            //Diseño
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+            SpinCuentas.adapter = adapter //Adaptador
+        }
+
+
+        //................SPINNER................//
+
+
         menuUser.translationX = screenWidth.toFloat();
+        menuUser.visibility = View.VISIBLE
 
         // Cierra el menú al iniciar la app
         menuServ.translationX = -screenWidth.toFloat()
+        menuServ.visibility = View.VISIBLE
 
         // Configura el clic para abrir y cerrar el menú con animación
         logoCompany.setOnClickListener {
@@ -99,9 +120,6 @@ class MainActivity : AppCompatActivity() {
             menuAbierto = !menuAbierto
         }
 
-
-
-
         btnUserIcon.setOnClickListener() {
             val moverX = if (menuUserAbierto)
                                 screenWidth.toFloat()
@@ -123,45 +141,9 @@ class MainActivity : AppCompatActivity() {
     }
     private fun CerrarSesion(){
         val intentNavegar = Intent(this, LoginActivity::class.java)
+        intentNavegar.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK;
         startActivity(intentNavegar)
-    }
-    private fun iniciarEscaneoQR() {
-        val integrator = IntentIntegrator(this)
-        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE) // Solo QR
-        integrator.setPrompt("Escanea un código QR \n \n")
-        integrator.setCameraId(0) // Cámara trasera
-        integrator.setBeepEnabled(true)
-        integrator.setBarcodeImageEnabled(false)
-        integrator.initiateScan() //Iniciar la cámara
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-        if (result != null) {
-            if (result.contents == null) {
-                Toast.makeText(this, "Escaneo cancelado", Toast.LENGTH_SHORT).show()
-            } else {
-                mostrarDatos(result.contents)
-            }
-        } else {
-            super.onActivityResult(requestCode, resultCode, data)
-        }
-    }
-
-    private fun mostrarDatos(datos: String) {
-        //remplazamos las llaves
-        val datosLimpios = datos
-            .replace("{", "")
-            .replace("}", "")
-            .replace("\n", "")
-            .replace("\r", "")
-            .replace("\"", "")
-
-        // Division de los datos
-        val partes = datosLimpios.split(",")
-        tvData1.text = partes.getOrNull(0) ?: "No disponible"
-        tvData2.text = partes.getOrNull(1) ?: "No disponible"
-        tvData3.text = partes.getOrNull(2) ?: "No disponible"
+        finish()
     }
 
 }
