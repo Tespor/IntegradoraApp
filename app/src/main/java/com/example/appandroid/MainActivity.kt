@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.animation.TranslateAnimation
 import androidx.appcompat.app.AppCompatActivity
@@ -57,18 +58,49 @@ class MainActivity : AppCompatActivity() {
         //................SPINNER................//
         val SpinCuentas: Spinner = findViewById(R.id.ddlCuenta)
 
-        HacerPostCuentas(this) { cuentasList ->
-            // Aquí se recibe la lista de cuentas
-            println("Cuentas recibidas: $cuentasList")
-
+        obtenerCuentas(this) { cuentasList ->
             val adapter = ArrayAdapter(
                 this, // Contexto (Activity o Fragment)
                 android.R.layout.simple_spinner_item, // Layout para los elementos del Spinner
                 cuentasList // La lista de datos
             )
             //Diseño
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+            adapter.setDropDownViewResource(R.layout.item_spinner_dropdown)
             SpinCuentas.adapter = adapter //Adaptador
+        }
+
+        // Detectar cambios en la selección y llenar datos
+        //=======================================================================//
+        //              Llenar los datos de la cuenta en el menu                 //
+        //=======================================================================//
+        SpinCuentas.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                // Aquí manejas la selección de un nuevo elemento
+                val seleccion = parent.getItemAtPosition(position).toString()
+
+                llenarDatosCuenta(this@MainActivity, seleccion.toInt(), { CuentaDatos ->
+                    if (CuentaDatos != null) {
+                        txtDireccion.text = CuentaDatos.direccion
+                        txtEstadoServicio.text = CuentaDatos.estadoServicio
+                        txtMesesAdeudados.text = CuentaDatos.mesesAdeudo.toString()
+                        txtAdudoMes.text = CuentaDatos.adeudoMes
+                        txtConsumoMes.text = CuentaDatos.consumoMesReciente
+                        txtConsumoPromedio.text = CuentaDatos.consumoPromedio
+                        txtProximoVencimiento.text = CuentaDatos.proximoVencimiento
+                        txtTipoContrato.text = CuentaDatos.tipoContrato
+                        txtAdeudoTotal.text = CuentaDatos.adeudoTotal
+                        txtNombre.text = CuentaDatos.nombreCompleto
+                    } else {
+                        println("No se obtuvieron datos de la cuenta.")
+                    }
+                })
+
+                Toast.makeText(this@MainActivity, "Seleccionaste: $seleccion", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+                Log.d("Spinner", "Nada seleccionado")
+            }
         }
 
 

@@ -23,7 +23,8 @@ import org.json.JSONException
 import java.net.URL
 
 //const val url_base: String = "http://192.168.137.153/Integradora/";//Utt
-const val url_base: String = "http://192.168.0.105/Integradora/";//Chamba
+const val url_base: String = "http://192.168.1.13/Integradora/";//Casa
+//const val url_base: String = "http://192.168.0.105/Integradora/";//Chamba
 const val sub_url: String = "${url_base}clientePhp/";
 
 object Endpoints {
@@ -31,7 +32,7 @@ object Endpoints {
     const val Registrar = "${url_base}registro.php"
     const val clienteTarjetas = "${sub_url}clienteTarjetas.php"
     const val datosCuenta = "${sub_url}datosCuenta.php"
-    const val obtenerCuentas = "${sub_url}clienteTarjetas.php"
+    const val obtenerCuentas = "${sub_url}obtenerCuentas.php"
     const val registrarCuentas = "${sub_url}registrarCuentas.php"
 }
 
@@ -175,12 +176,17 @@ fun registrarUsuario(context: Context, usuario: String, nombreCompleto: String, 
     })
 }
 
+//=======================================================================//
+//                       Funciones para cuentas                          //
+//=======================================================================//
 
-fun HacerPostCuentas(context: Context, respuesta: (List<Int>) -> Unit) {
+fun obtenerCuentas(context: Context, respuesta: (List<Int>) -> Unit) {
     val client = OkHttpClient()
 
     // URL de la solicitud POST
-    val url = "http://192.168.0.105/Integradora/clientePhp/obtenerCuentas.php"
+    //val url = "http://192.168.0.105/Integradora/clientePhp/obtenerCuentas.php"
+    val url = Endpoints.obtenerCuentas
+    println(url)
 
     val jsonObject = JSONObject()
     jsonObject.put("id", IdDeUsuario.toInt())
@@ -240,72 +246,90 @@ fun HacerPostCuentas(context: Context, respuesta: (List<Int>) -> Unit) {
     })
 }
 
-
-fun obtenerCuentas(context: Context, respuesta: (List<String>) -> Unit) {
+fun llenarDatosCuenta(context: Context, idCuenta: Int, callback: (CuentaDatos?) -> Unit) {
     val client = OkHttpClient()
 
-    // URL de la solicitud GET
-    val url = "http://192.168.0.105/Integradora/clientePhp/obtenerCuentas.php"
+    // Crear un objeto JSON con el idCuenta
+    val jsonObject = JSONObject()
+    jsonObject.put("idCuenta", idCuenta)
 
-    // Solicitud HTTP GET
+    // Crear el cuerpo de la solicitud
+    val requestBody = jsonObject.toString().toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+
+    // Configurar la solicitud POST
     val request = Request.Builder()
-        .url(url) // Aquí no enviamos parámetros, solo la URL
-        .get()
+        .url(Endpoints.datosCuenta)
+        .post(requestBody)
         .build()
 
-    // Realizar la solicitud en un hilo secundario
+    // Realizar la solicitud
     client.newCall(request).enqueue(object : Callback {
         override fun onFailure(call: Call, e: IOException) {
             e.printStackTrace()
+            println("Fallo al realizar la solicitud: ${e.message}")
             (context as Activity).runOnUiThread {
-                respuesta(emptyList()) // En caso de fallo, devolver lista vacía
+                callback(null) // Devolver null en caso de fallo
             }
         }
 
         override fun onResponse(call: Call, response: Response) {
-            if (response.isSuccessful) {
-                val responseData = response.body?.string()
-                if (responseData != null) {
-                    try {
-                        val jsonResponse = JSONObject(responseData)
-
-                        // Verificar si hay un error en la respuesta
-                        if (jsonResponse.has("error")) {
-                            val errorMessage = jsonResponse.getString("error")
-                            println("Error: $errorMessage")
-                            (context as Activity).runOnUiThread {
-                                respuesta(emptyList()) // Devolver lista vacía si hay error
-                            }
-                        } else {
-                            val cuentasList = mutableListOf<String>()
-
-                            // Aquí asumo que las cuentas están dentro de un array en la respuesta
-                            val jsonArray = jsonResponse.getJSONArray("cuentas")
-                            for (i in 0 until jsonArray.length()) {
-                                cuentasList.add(jsonArray.getString(i))
-                            }
-
-                            // Devolver la lista de cuentas
-                            (context as Activity).runOnUiThread {
-                                respuesta(cuentasList)
-                            }
-                        }
-                    } catch (e: Exception) {
-                        e.printStackTrace()
+            response.body?.string()?.let {
+                try {
+                    // Procesar la respuesta JSON
+                    val jsonResponse = JSONObject(it)
+                    if (jsonResponse.has("error")) {
+                        // Manejar el error de la respuesta
+                        println("Error desde el servidor: ${jsonResponse.getString("error")}")
                         (context as Activity).runOnUiThread {
-                            respuesta(emptyList()) // En caso de error en el parseo, devolver lista vacía
+                            callback(null)
+                        }
+                    } else {
+                        // Mapear los datos a un objeto CuentaDatos
+                        val cuentaDatos = CuentaDatos(
+                            estadoServicio = jsonResponse.getString("estado_servicio"),
+                            adeudoMes = jsonResponse.getString("adeudo_mes"),
+                            tipoContrato = jsonResponse.getString("tipo_contrato"),
+                            direccion = jsonResponse.getString("direccion"),
+                            consumoPromedio = jsonResponse.getString("consumo_promedio"),
+                            consumoMesReciente = jsonResponse.getString("consumo_mes_reciente"),
+                            proximoVencimiento = jsonResponse.getString("proximo_vencimiento"),
+                            adeudoTotal = jsonResponse.getString("adeudo_total"),
+                            mesesAdeudo = jsonResponse.getString("meses_adeudo"),
+                            nombreCompleto = jsonResponse.getString("nombre_completo")
+                        )
+
+                        // Devolver los datos en la UI principal
+                        (context as Activity).runOnUiThread {
+                            callback(cuentaDatos)
                         }
                     }
-                }
-            } else {
-                println("Error: Respuesta fallida del servidor")
-                (context as Activity).runOnUiThread {
-                    respuesta(emptyList()) // Devolver lista vacía en caso de error
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    println("Error al procesar la respuesta: ${e.message}")
+                    (context as Activity).runOnUiThread {
+                        callback(null)
+                    }
                 }
             }
         }
     })
 }
+
+// Clase de datos para mapear la respuesta
+data class CuentaDatos(
+    val estadoServicio: String,
+    val adeudoMes: String,
+    val tipoContrato: String,
+    val direccion: String,
+    val consumoPromedio: String,
+    val consumoMesReciente: String,
+    val proximoVencimiento: String,
+    val adeudoTotal: String,
+    val mesesAdeudo: String,
+    val nombreCompleto: String
+)
+
+
 
 
 
