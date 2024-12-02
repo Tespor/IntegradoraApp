@@ -8,6 +8,18 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Estilos del Spinner -->
+    <style name="CustomSpinnerStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:background">#2C8EF9</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:spinnerMode">dropdown</item>
+        <item name="android:popupBackground">#2C8EF9</item>
+        <item name="android:dropDownVerticalOffset">48dp</item>
+    </style>
+
     <!-- Estilo personalizado para botones -->
     <style name="CustomButtonStyle" parent="Widget.Material3.Button">
         <item name="backgroundTint">@color/bluedark</item>

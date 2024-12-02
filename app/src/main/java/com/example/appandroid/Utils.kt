@@ -48,5 +48,18 @@ fun showPopup(context: Context, mensaje: String) {
     toast.show()
 }
 
+fun showPopupSuccess(context: Context, mensaje: String) {
+    val inflater = LayoutInflater.from(context)
+    val layout = inflater.inflate(R.layout.success_popup, null)
+
+    // Texto del Alert
+    val toastText = layout.findViewById<TextView>(R.id.txtAlertLogin)
+    toastText.text = mensaje
+
+    val toast = Toast(context)
+    toast.view = layout
+    toast.show()
+}
+
 class Utils {
 }

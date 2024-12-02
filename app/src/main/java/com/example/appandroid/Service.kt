@@ -184,7 +184,6 @@ fun obtenerCuentas(context: Context, respuesta: (List<Int>) -> Unit) {
     val client = OkHttpClient()
 
     // URL de la solicitud POST
-    //val url = "http://192.168.0.105/Integradora/clientePhp/obtenerCuentas.php"
     val url = Endpoints.obtenerCuentas
     println(url)
 
@@ -329,6 +328,68 @@ data class CuentaDatos(
     val nombreCompleto: String
 )
 
+//=======================================================================//
+//                         Crear Nueva Cuenta                            //
+//=======================================================================//
+fun crearServicio(
+    context: Context,
+    estadoServicio: String,
+    tipoContrato: String,
+    direccion: String,
+    respuesta: (String) -> Unit
+) {
+    // Validación básica de campos vacíos
+    if (estadoServicio == "" || tipoContrato == "" || direccion == "") {
+        (context as Activity).runOnUiThread {
+            respuesta("0")
+        }
+        return
+    }
+
+    val client = OkHttpClient()
+
+    // Crear el objeto JSON con los datos a enviar
+    val jsonObject = JSONObject()
+    jsonObject.put("estadoServicio", estadoServicio)
+    jsonObject.put("tipoContrato", tipoContrato)
+    jsonObject.put("direccion", direccion)
+    jsonObject.put("id", IdDeUsuario.toInt())
+
+    // Cuerpo de la solicitud en JSON
+    val requestBody = jsonObject.toString().toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+    println("Este es el endpoin: ${Endpoints.registrarCuentas}")
+    // Configurar la solicitud HTTP POST
+    val request = Request.Builder()
+        .url("http://192.168.1.13/Integradora/clientePhp/registrarCuentas.php")
+        .post(requestBody)
+        .build()
+
+    // Realizar la solicitud en un hilo secundario
+    client.newCall(request).enqueue(object : Callback {
+        override fun onFailure(call: Call, e: IOException) {
+            println("Error al conectar: ${e.message}")
+            (context as Activity).runOnUiThread {
+                respuesta("Error al conectar: ${e.message}")
+            }
+        }
+
+
+        override fun onResponse(call: Call, response: Response) {
+            val responseData = response.body?.string()
+            println("Respuesta del servidor: $responseData")
+
+            if (response.isSuccessful && responseData != null) {
+                (context as Activity).runOnUiThread {
+                    respuesta("1")
+                }
+            } else {
+                (context as Activity).runOnUiThread {
+                    respuesta("Error al crear la cuenta")
+                }
+            }
+        }
+    })
+}
 
 
 

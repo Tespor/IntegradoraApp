@@ -59,7 +59,7 @@ class RegistrarActivity : AppCompatActivity() {
 
             registrarUsuario(this, tx1, tx2, tx3, tx4){ respuesta ->
                 if (respuesta == "1"){
-                    showPopup(this, "Usuario registrado correctamente")
+                    showPopupSuccess(this, "Usuario registrado correctamente")
                     val intentNavLogin = Intent(this, LoginActivity::class.java)
                     startActivity(intentNavLogin)
                     finish()

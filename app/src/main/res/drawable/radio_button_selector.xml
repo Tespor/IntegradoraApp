@@ -1,0 +1,7 @@
+<!-- res/drawable/radio_button_selector.xml -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Cuando el RadioButton está seleccionado -->
+    <item android:drawable="@drawable/rounded_button" android:state_checked="true"/>
+    <!-- Cuando el RadioButton no está seleccionado -->
+    <item android:drawable="@drawable/border_blue" android:state_checked="false"/>
+</selector>

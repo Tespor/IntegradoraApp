@@ -55,21 +55,30 @@ class MainActivity : AppCompatActivity() {
         //Menu lateral
         menuServ.visibility = View.VISIBLE
 
+        //=======================================================================//
+        //                Sacar las cuentas y llenar el spinner                  //
+        //=======================================================================//
         //................SPINNER................//
         val SpinCuentas: Spinner = findViewById(R.id.ddlCuenta)
 
         obtenerCuentas(this) { cuentasList ->
-            val adapter = ArrayAdapter(
-                this, // Contexto (Activity o Fragment)
-                android.R.layout.simple_spinner_item, // Layout para los elementos del Spinner
-                cuentasList // La lista de datos
-            )
-            //Diseño
-            adapter.setDropDownViewResource(R.layout.item_spinner_dropdown)
-            SpinCuentas.adapter = adapter //Adaptador
+
+            if (cuentasList.isNotEmpty()) {
+                val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, cuentasList)
+                //Diseño
+                adapter.setDropDownViewResource(R.layout.item_spinner_dropdown)
+                SpinCuentas.adapter = adapter
+            } else {
+                val arrayDenull = arrayOf("Aun no existen cuentas")
+
+                val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, cuentasList)
+                //Diseño
+                adapter.setDropDownViewResource(R.layout.item_spinner_dropdown)
+                SpinCuentas.adapter = adapter
+            }
         }
 
-        // Detectar cambios en la selección y llenar datos
+
         //=======================================================================//
         //              Llenar los datos de la cuenta en el menu                 //
         //=======================================================================//
@@ -103,10 +112,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-
+        //=======================================================================//
+        //           Detectar cambios en la selección y llenar datos             //
+        //=======================================================================//
         //................SPINNER................//
-
-
         menuUser.translationX = screenWidth.toFloat();
         menuUser.visibility = View.VISIBLE
 
@@ -114,7 +123,7 @@ class MainActivity : AppCompatActivity() {
         menuServ.translationX = -screenWidth.toFloat()
         menuServ.visibility = View.VISIBLE
 
-        // Configura el clic para abrir y cerrar el menú con animación
+        // Configuracion del clic para abrir y cerrar el menú con animación
         logoCompany.setOnClickListener {
             //evita que se abra el menu usuario
             btnUserIcon.isEnabled = menuAbierto
@@ -170,7 +179,19 @@ class MainActivity : AppCompatActivity() {
         btnCerrarSesion.setOnClickListener(){
             CerrarSesion();
         }
+
+        val btnAddCuenta = findViewById<Button>(R.id.btnAddCuenta);
+        btnAddCuenta.setOnClickListener(){
+            irACrearCuenta()
+        }
+
     }
+
+    private fun irACrearCuenta(){
+        val intentAddCuenta = Intent(this, AgregarCuentaActivity::class.java)
+        startActivity(intentAddCuenta)
+    }
+
     private fun CerrarSesion(){
         val intentNavegar = Intent(this, LoginActivity::class.java)
         intentNavegar.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK;

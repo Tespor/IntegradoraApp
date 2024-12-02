@@ -142,7 +142,7 @@
                     android:background="@color/bluelight"
                     android:layout_marginTop="8dp" tools:ignore="MissingConstraints"/>
             <Button
-                    android:id="@+id/btnScan"
+                    android:id="@+id/btnAddCuenta"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     style="@style/CustomButtonStyle2"
@@ -152,12 +152,9 @@
             <!-- Spinner (DropdownList) -->
             <Spinner
                     android:id="@+id/ddlCuenta"
+                    style="@style/CustomSpinnerStyle"
                     android:layout_marginTop="20dp"
-                    android:layout_width="match_parent"
                     android:background="@drawable/rounded_button"
-                    android:layout_height="wrap_content"
-                    android:spinnerMode="dropdown"
-                    style="@style/CustomButtonStyle2"
             />
         </LinearLayout>
 
