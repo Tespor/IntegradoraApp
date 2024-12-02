@@ -22,7 +22,9 @@ import androidx.core.content.ContextCompat
 class AgregarCuentaActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(R.layout.activity_agregar_cuenta)
+
 
         //Direccion txtview
         val etDireccion = findViewById<TextView>(R.id.etDireccion)

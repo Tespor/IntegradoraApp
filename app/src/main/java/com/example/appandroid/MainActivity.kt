@@ -12,6 +12,7 @@ import android.view.animation.TranslateAnimation
 import androidx.appcompat.app.AppCompatActivity
 import android.webkit.WebView
 import android.widget.*
+import androidx.activity.enableEdgeToEdge
 import com.example.appandroid.Utils
 import com.google.zxing.integration.android.IntentIntegrator
 
@@ -23,6 +24,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
         //Datos del usuario
@@ -71,7 +73,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 val arrayDenull = arrayOf("Aun no existen cuentas")
 
-                val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, cuentasList)
+                val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, arrayDenull)
                 //Diseño
                 adapter.setDropDownViewResource(R.layout.item_spinner_dropdown)
                 SpinCuentas.adapter = adapter
@@ -86,29 +88,33 @@ class MainActivity : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
                 // Aquí manejas la selección de un nuevo elemento
                 val seleccion = parent.getItemAtPosition(position).toString()
+                val ExpresionTxt = Regex("[^0-9 ]") // Coincide con cualquier cosa que no sea un número o espacio
 
-                llenarDatosCuenta(this@MainActivity, seleccion.toInt(), { CuentaDatos ->
-                    if (CuentaDatos != null) {
-                        txtDireccion.text = CuentaDatos.direccion
-                        txtEstadoServicio.text = CuentaDatos.estadoServicio
-                        txtMesesAdeudados.text = CuentaDatos.mesesAdeudo.toString()
-                        txtAdudoMes.text = CuentaDatos.adeudoMes
-                        txtConsumoMes.text = CuentaDatos.consumoMesReciente
-                        txtConsumoPromedio.text = CuentaDatos.consumoPromedio
-                        txtProximoVencimiento.text = CuentaDatos.proximoVencimiento
-                        txtTipoContrato.text = CuentaDatos.tipoContrato
-                        txtAdeudoTotal.text = CuentaDatos.adeudoTotal
-                        txtNombre.text = CuentaDatos.nombreCompleto
-                    } else {
-                        println("No se obtuvieron datos de la cuenta.")
-                    }
-                })
+                if (ExpresionTxt.containsMatchIn(seleccion)) {
+                    println("Algo salio mal¡")
+                } else {
+                    llenarDatosCuenta(this@MainActivity, seleccion.toInt(), { CuentaDatos ->
+                        if (CuentaDatos != null) {
+                            txtDireccion.text = CuentaDatos.direccion
+                            txtEstadoServicio.text = CuentaDatos.estadoServicio
+                            txtMesesAdeudados.text = CuentaDatos.mesesAdeudo.toString()
+                            txtAdudoMes.text = CuentaDatos.adeudoMes
+                            txtConsumoMes.text = CuentaDatos.consumoMesReciente
+                            txtConsumoPromedio.text = CuentaDatos.consumoPromedio
+                            txtProximoVencimiento.text = CuentaDatos.proximoVencimiento
+                            txtTipoContrato.text = CuentaDatos.tipoContrato
+                            txtAdeudoTotal.text = CuentaDatos.adeudoTotal
+                            txtNombre.text = CuentaDatos.nombreCompleto
+                        } else {
+                            println("No se obtuvieron datos de la cuenta.")
+                        }
+                    })
+                }
 
-                Toast.makeText(this@MainActivity, "Seleccionaste: $seleccion", Toast.LENGTH_SHORT).show()
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
-                Log.d("Spinner", "Nada seleccionado")
+                //Por si acaso necesito agregar algo aqui
             }
         }
 
@@ -183,6 +189,12 @@ class MainActivity : AppCompatActivity() {
         val btnAddCuenta = findViewById<Button>(R.id.btnAddCuenta);
         btnAddCuenta.setOnClickListener(){
             irACrearCuenta()
+        }
+
+        val btnPagar = findViewById<Button>(R.id.btnPagar)
+        btnPagar.setOnClickListener(){
+            val intentPagar = Intent(this, PagosYTarjetasActivity::class.java)
+            startActivity(intentPagar)
         }
 
     }

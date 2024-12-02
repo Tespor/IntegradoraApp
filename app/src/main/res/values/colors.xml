@@ -12,4 +12,7 @@
     <color name="colorAccent">#ff0000</color>
     <color name="transparent">#02000000</color>
     <color name="Warning">#FFCE00</color>
+
+    <color name="colorStart">#00B0DA</color> <!-- rgba(0,176,218,1) -->
+    <color name="colorEnd">#18668F</color>   <!-- rgba(24,102,143,1) -->
 </resources>

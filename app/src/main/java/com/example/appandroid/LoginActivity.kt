@@ -28,6 +28,7 @@ class LoginActivity : AppCompatActivity() {
             insets
         }
         setContentView(R.layout.activity_login)
+
         val btnIngresar: Button = findViewById(R.id.btn_ingresar)
         val btnRegistrar: TextView = findViewById(R.id.txtregistrar)
         val btnVer: ImageButton = findViewById(R.id.imgBtnOjo1)

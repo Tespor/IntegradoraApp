@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- res/drawable/border_blue.xml -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- Fondo transparente -->
-    <solid android:color="@android:color/transparent" />
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+        android:color="#FFFFFF">
 
-    <!-- Borde azul con un grosor de 2dp -->
-    <stroke
-            android:color="@color/bluedark"
-            android:width="2dp" />
+<item>
+    <!-- res/drawable/border_blue.xml -->
+    <shape xmlns:android="http://schemas.android.com/apk/res/android">
+        <!-- Fondo transparente -->
+        <solid android:color="@android:color/transparent" />
+        <!-- Borde azul con un grosor de 2dp -->
+        <stroke
+                android:color="@color/bluedark"
+                android:width="2dp" />
+        <!-- Esquinas redondeadas -->
+        <corners android:radius="50dp" />  <!-- Ajusta el radio según lo necesites -->
+    </shape>
 
-    <!-- Esquinas redondeadas -->
-    <corners android:radius="50dp" />  <!-- Ajusta el radio según lo necesites -->
-</shape>
+</item>
+</ripple>

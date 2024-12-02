@@ -85,8 +85,6 @@
                 android:layout_weight="1"
                 android:id="@+id/txtNombre"
                 android:padding="12dp"
-                android:paddingEnd="28dp"
-                android:paddingStart="28dp"
                 android:text="Nombre del Usuario"
                 android:textColor="@android:color/white"
                 android:textSize="18sp"/>

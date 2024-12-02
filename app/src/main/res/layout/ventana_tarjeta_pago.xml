@@ -1,110 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
+        android:background="#021B26"
         android:padding="16dp"
-        android:layout_gravity="center"
-        android:background="@color/blackalpha">
+        tools:context=".MainActivity">
 
+    <!-- Encabezado -->
     <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvTitulo"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="AGREGA UNA TARJETA PARA PAGAR"
+            android:text="PAGOS DE SERVICIO"
+            android:textColor="@color/white"
             android:textSize="20sp"
-            android:textColor="#1E88E5"
-            android:textStyle="bold"
-            android:layout_gravity="center"/>
-
+            android:gravity="center"
+            android:padding="8dp"
+            android:textStyle="bold" />
     <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="#1E88E5"
-            android:layout_marginTop="8dp"/>
+            android:background="@drawable/bradius"
+            android:backgroundTint="@color/bluelight"
+            android:layout_marginTop="8dp" tools:ignore="MissingConstraints"/>
 
-    <EditText
-            android:id="@+id/etNumeroTarjeta"
-            android:layout_width="match_parent"
-            android:hint="Número de Tarjeta"
-            android:padding="12dp"
-            android:inputType="number"
-            android:textColorHint="#BDBDBD"
-            android:layout_height="48dp"
-            android:background="@drawable/rounded"
-            android:backgroundTint="@color/blackalphahigh"
-            style="@style/TextboxStyle2"
-            android:autofillHints="name"
-            android:ems="10"
-            android:layout_marginTop="12dp" android:textSize="16sp"/>
-
-    <EditText
-            android:id="@+id/etNombreTitular"
-            android:layout_width="match_parent"
-            android:hint="Nombre del Titular"
-            android:padding="12dp"
-            android:inputType="textPersonName"
-            android:textColorHint="#BDBDBD"
-            android:layout_height="48dp"
-            android:background="@drawable/rounded"
-            android:backgroundTint="@color/blackalphahigh"
-            style="@style/TextboxStyle2"
-            android:autofillHints="name"
-            android:ems="10"
-            android:layout_marginTop="12dp" android:textSize="16sp"/>
-
+    <!-- Botones de acción -->
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp">
+            android:gravity="center"
+            android:layout_marginTop="16dp">
 
-        <EditText
-                android:id="@+id/etFechaVencimiento"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:hint="Fecha de Vencimiento"
-                android:inputType="date"
-                android:textColorHint="#BDBDBD"
+        <ImageButton
+                android:id="@+id/btnEliminar"
+                android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:background="@drawable/rounded"
-                android:backgroundTint="@color/blackalphahigh"
-                style="@style/TextboxStyle2"
-                android:autofillHints="name"
-                android:ems="10"
-                android:layout_marginTop="12dp" android:textSize="16sp"/>
+                android:background="@drawable/rounded_button"
+                android:src="@drawable/icon_delete"
+                android:padding="10dp"
+                android:contentDescription="Eliminar"
+                android:tint="@color/white" />
 
-        <Space
-                android:layout_width="8dp"
-                android:layout_height="wrap_content"/>
-
-        <EditText
-                android:id="@+id/etCVV"
-                android:layout_width="0dp"
+        <ImageButton
+                android:id="@+id/btnAgregar"
+                android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_weight="1"
-                android:hint="CVV"
-                android:background="@drawable/rounded"
-                android:backgroundTint="@color/blackalphahigh"
-                style="@style/TextboxStyle2"
-                android:inputType="numberPassword"
-                android:autofillHints="name"
-                android:ems="10"
-                android:layout_marginTop="12dp"
-                android:textColorHint="#BDBDBD" android:textSize="16sp"/>
+                android:background="@drawable/rounded_button"
+                android:src="@drawable/icon_add"
+                android:padding="8dp"
+                android:contentDescription="Agregar"
+                android:tint="@color/white"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp" />
 
+        <Button
+                android:id="@+id/btnTarjetas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_blue"
+                android:text="TARJETAS REGISTRADAS"
+                android:textColor="@color/bluedark"
+                style="@style/CustomButtonStyle2"/>
     </LinearLayout>
 
+    <!-- Spinner -->
+    <Spinner
+            android:id="@+id/spinnerTarjetas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            style="@style/TextboxStyle2"
+            android:background="@drawable/bradius"
+            android:backgroundTint="@color/black"
+            android:padding="8dp"
+            android:dropDownWidth="match_parent" />
+
+    <!-- Tarjeta -->
+    <LinearLayout
+            android:id="@+id/layoutTarjeta"
+            android:layout_width="355dp"
+            android:layout_height="210dp"
+            android:orientation="vertical"
+            android:background="@drawable/bradius"
+            android:backgroundTint="@color/blue1"
+            android:padding="16dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp">
+
+        <LinearLayout android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_marginBottom="26dp"
+                      android:orientation="horizontal">
+            <View
+                    android:layout_width="48dp"
+                    android:layout_height="32dp"
+                    android:backgroundTint="#FFEB3B"
+                    android:background="@drawable/bradius" />
+
+            <TextView
+                    android:id="@+id/tvBanco"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="BANCO FINTERRA"
+                    android:layout_weight="1"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textAlignment="textEnd"
+                    android:paddingBottom="8dp" />
+        </LinearLayout>
+
+        <TextView
+                android:id="@+id/tvNumeroTarjeta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="34dp"
+                android:text="9237 6457 8364 5873"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="16dp">
+
+            <TextView
+                    android:id="@+id/tvVencimiento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12/12"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:layout_weight="1" />
+
+            <TextView
+                    android:id="@+id/tvTipoTarjeta"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Débito"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:gravity="end" />
+        </LinearLayout>
+        <TextView
+                android:id="@+id/tvNombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Prueba de tarjeta"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textAllCaps="true"
+                android:gravity="end" />
+    </LinearLayout>
+
+    <!-- Botón Pagar -->
     <Button
             android:id="@+id/btnPagar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="PAGAR"
-            android:textColor="#FFFFFF"
-            android:backgroundTint="#1E88E5"
+            android:background="@drawable/rounded_button"
+            android:textColor="@color/white"
             android:layout_marginTop="16dp"
-            android:padding="12dp"
-            style="@style/CustomButtonStyle2"
-            android:background="@drawable/rounded_button"/>
+            style="@style/CustomButtonStyle2" />
+
 </LinearLayout>

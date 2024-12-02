@@ -23,8 +23,8 @@ import org.json.JSONException
 import java.net.URL
 
 //const val url_base: String = "http://192.168.137.153/Integradora/";//Utt
-const val url_base: String = "http://192.168.1.13/Integradora/";//Casa
-//const val url_base: String = "http://192.168.0.105/Integradora/";//Chamba
+//const val url_base: String = "http://192.168.1.13/Integradora/";//Casa
+const val url_base: String = "http://192.168.0.104/Integradora/";//Chamba
 const val sub_url: String = "${url_base}clientePhp/";
 
 object Endpoints {
@@ -360,7 +360,8 @@ fun crearServicio(
     println("Este es el endpoin: ${Endpoints.registrarCuentas}")
     // Configurar la solicitud HTTP POST
     val request = Request.Builder()
-        .url("http://192.168.1.13/Integradora/clientePhp/registrarCuentas.php")
+        //.url("http://192.168.1.13/Integradora/clientePhp/registrarCuentas.php")
+        .url(Endpoints.registrarCuentas)
         .post(requestBody)
         .build()
 

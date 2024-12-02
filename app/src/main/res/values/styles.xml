@@ -20,6 +20,24 @@
         <item name="android:dropDownVerticalOffset">48dp</item>
     </style>
 
+    <style name="CustomSpinnerStyle2">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:minHeight">48dp</item>
+        <item name="android:spinnerMode">dropdown</item>
+        <item name="android:popupBackground">#000</item>
+        <item name="android:dropDownVerticalOffset">48dp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColorHint">@color/whitealpha</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:background">@drawable/efecto_select_sinrounded</item>
+        <item name="backgroundTint">@color/blackalpha</item>
+    </style>
+
     <!-- Estilo personalizado para botones -->
     <style name="CustomButtonStyle" parent="Widget.Material3.Button">
         <item name="backgroundTint">@color/bluedark</item>
