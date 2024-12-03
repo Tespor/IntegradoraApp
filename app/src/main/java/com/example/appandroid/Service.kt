@@ -22,9 +22,9 @@ import org.json.JSONArray
 import org.json.JSONException
 import java.net.URL
 
-//const val url_base: String = "http://192.168.137.153/Integradora/";//Utt
-//const val url_base: String = "http://192.168.1.13/Integradora/";//Casa
-const val url_base: String = "http://192.168.0.104/Integradora/";//Chamba
+//const val url_base: String = "http://192.168.137.124/Integradora/";//Utt
+const val url_base: String = "http://192.168.1.13/Integradora/";//Casa
+//const val url_base: String = "http://192.168.0.104/Integradora/";//Chamba
 const val sub_url: String = "${url_base}clientePhp/";
 
 object Endpoints {
@@ -386,6 +386,169 @@ fun crearServicio(
             } else {
                 (context as Activity).runOnUiThread {
                     respuesta("Error al crear la cuenta")
+                }
+            }
+        }
+    })
+}
+//=======================================================================//
+//                       Funciones para tarjetas                         //
+//=======================================================================//
+data class Tarjeta(
+    val numeroTarjeta: String,
+    val titular: String,
+    val banco: String,
+    val CVV: String,
+    val fechaVencimiento: String,
+    val fk_usuario: Int
+)
+
+
+fun obtenerTarjetas(context: Context, respuesta: (List<Tarjeta>) -> Unit) {
+    val client = OkHttpClient()
+
+    // Construir la URL con el parámetro GET
+    val url = "${Endpoints.clienteTarjetas}?id=$IdDeUsuario"
+
+    // Crear la solicitud GET
+    val request = Request.Builder()
+        .url(url)
+        .get()
+        .build()
+
+    // Ejecutar la solicitud en un hilo secundario
+    client.newCall(request).enqueue(object : Callback {
+        override fun onFailure(call: Call, e: IOException) {
+            e.printStackTrace()
+            (context as Activity).runOnUiThread {
+                respuesta(emptyList()) // En caso de fallo, devolver lista vacía
+            }
+        }
+
+        override fun onResponse(call: Call, response: Response) {
+            if (response.isSuccessful) {
+                val responseData = response.body?.string()
+                if (responseData != null) {
+                    try {
+                        Log.d("HacerGetTarjetas", "Respuesta del servidor: $responseData")
+
+                        // Parsear la respuesta JSON como un arreglo de objetos
+                        val jsonArray = JSONArray(responseData)
+                        val tarjetasList = mutableListOf<Tarjeta>()
+
+                        for (i in 0 until jsonArray.length()) {
+                            val jsonTarjeta = jsonArray.getJSONObject(i)
+                            val tarjeta = Tarjeta(
+                                numeroTarjeta = jsonTarjeta.getString("numeroTarjeta"),
+                                titular = jsonTarjeta.getString("titular"),
+                                banco = jsonTarjeta.getString("banco"),
+                                CVV = jsonTarjeta.getString("CVV"),
+                                fechaVencimiento = jsonTarjeta.getString("fechaVencimiento"),
+                                fk_usuario = jsonTarjeta.getInt("fk_usuario")
+                            )
+                            tarjetasList.add(tarjeta)
+                        }
+
+                        // Devolver la lista de tarjetas en el hilo principal
+                        (context as Activity).runOnUiThread {
+                            respuesta(tarjetasList)
+                        }
+                    } catch (e: Exception) {
+                        e.printStackTrace()
+                        (context as Activity).runOnUiThread {
+                            respuesta(emptyList()) // Devolver lista vacía en caso de error
+                        }
+                    }
+                }
+            } else {
+                Log.e("HacerGetTarjetas", "Error en la respuesta del servidor")
+                (context as Activity).runOnUiThread {
+                    respuesta(emptyList()) // Devolver lista vacía en caso de error
+                }
+            }
+        }
+    })
+}
+
+fun registrarTarjeta(
+    context: Context,
+    tarjeta: String,
+    titular: String,
+    banco: String,
+    fechaVencimiento: String,
+    cvv: String,
+    respuesta: (String) -> Unit
+) {
+    if (tarjeta.isEmpty() || titular.isEmpty() || banco.isEmpty() || fechaVencimiento.isEmpty() || cvv.isEmpty()) {
+        (context as Activity).runOnUiThread {
+            respuesta("No deben existir campos vacíos")
+        }
+        return
+    }
+
+    val client = OkHttpClient()
+
+    // Crear el JSON de los datos a enviar
+    val jsonObject = JSONObject()
+    jsonObject.put("tarjeta", tarjeta)
+    jsonObject.put("titular", titular)
+    jsonObject.put("banco", banco)
+    jsonObject.put("vencimiento", fechaVencimiento)
+    jsonObject.put("CVV", cvv)
+    jsonObject.put("userID", IdDeUsuario)
+
+    // Crear el cuerpo de la solicitud en formato JSON
+    val requestBody = jsonObject.toString().toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+
+    // Crear la solicitud POST
+    val request = Request.Builder()
+        .url(Endpoints.clienteTarjetas) // Cambia por tu URL local
+        .post(requestBody)
+        .addHeader("Content-Type", "application/json")
+        .build()
+
+    // Realizar la solicitud
+    client.newCall(request).enqueue(object : Callback {
+        override fun onFailure(call: Call, e: IOException) {
+            e.printStackTrace()
+            (context as Activity).runOnUiThread {
+                respuesta("Error de conexión: ${e.message}")
+            }
+        }
+
+        override fun onResponse(call: Call, response: Response) {
+            val responseData = response.body?.string()
+            if (responseData != null) {
+                println("Respuesta del servidor: $responseData") // Para depuración
+                try {
+                    val jsonResponse = JSONObject(responseData)
+                    if (jsonResponse.has("status")) {
+                        val status = jsonResponse.getInt("status")
+                        val message = jsonResponse.getString("message")
+
+                        (context as Activity).runOnUiThread {
+                            if (status == 1) {
+                                println(message)
+                                respuesta("1")
+                            } else {
+                                println("Error al registrar la tarjeta: $message")
+                                respuesta("2")
+                            }
+                        }
+                    } else {
+                        (context as Activity).runOnUiThread {
+                            respuesta("Respuesta inesperada del servidor: clave 'status' no encontrada")
+                        }
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                    (context as Activity).runOnUiThread {
+                        respuesta("Error al procesar la respuesta JSON")
+                    }
+                }
+            } else {
+                (context as Activity).runOnUiThread {
+                    respuesta("Respuesta vacía del servidor")
                 }
             }
         }

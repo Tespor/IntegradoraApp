@@ -54,6 +54,10 @@ class AgregarCuentaActivity : AppCompatActivity() {
         val rbActivo: RadioButton = findViewById(R.id.rbActivo)
         val rbInactivo: RadioButton = findViewById(R.id.rbInactivo)
 
+        //Lo activamos por primera vezx con su color
+        rbActivo.buttonTintList = activoColorStateList
+
+
         rbActivo.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 rbActivo.buttonTintList = activoColorStateList
@@ -104,9 +108,6 @@ class AgregarCuentaActivity : AppCompatActivity() {
         // Verifica cuál RadioButton está seleccionado y obtén su texto
         val selectedRadioButton = findViewById<RadioButton>(selectedId)
         val selectedText = selectedRadioButton.text.toString()
-
-        // Muestra el texto seleccionado
-        Log.d("Selected", "Texto seleccionado: $selectedText")
         return selectedText
     }
 
