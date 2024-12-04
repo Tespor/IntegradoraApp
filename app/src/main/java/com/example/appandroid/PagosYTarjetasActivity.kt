@@ -1,5 +1,6 @@
 package com.example.appandroid
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -392,12 +393,26 @@ class PagosYTarjetasActivity : AppCompatActivity() {
                         mesesPagados = mesesAduedo,
                         fkCuenta = numeroCuenta,
                         fkTarjeta = textoSeleccionado
-                    ) { mensaje ->
-                        // Manejar la respuesta en la interfaz de usuario
-                        Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
+                    ) { resultado ->
+                        if (resultado.mensaje == "1"){
+                            showPopupSuccess(this, "Pago exitoso")
+                            val intentInicio = Intent(this, MainActivity::class.java)
+                            intentInicio.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK;
+                            startActivity(intentInicio)
+                            finish()
+                            /*val txDataTransaccion: TextView = findViewById(R.id.txDataTransaccion)
+                            val txDataEstado: TextView = findViewById(R.id.txDataEstado)
+                            val txtDataFpago: TextView = findViewById(R.id.txtDataFpago)
+
+                            txtDataFpago.text = obtenerFechaActual()
+                            txDataTransaccion.text = resultado.transaccion
+                            txDataEstado.text = "Liquidado"*/
+                        } else {
+                            showPopup(this, resultado.mensaje)
+                        }
                     }
                 }
-                else -> showPopupSuccess(this, "No Funciona")
+                else -> showPopupSuccess(this, "Sin funcionamiento")
             }
         }
 

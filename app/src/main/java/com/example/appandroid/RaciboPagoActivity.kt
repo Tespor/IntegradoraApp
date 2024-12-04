@@ -8,6 +8,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class RaciboPagoActivity : AppCompatActivity() {
 
@@ -183,6 +185,10 @@ class RaciboPagoActivity : AppCompatActivity() {
             "Compartamos"
         )
 
+        val txDataTransaccion: TextView = findViewById(R.id.txDataTransaccion)
+        val txDataEstado: TextView = findViewById(R.id.txDataEstado)
+        val txtDataFpago: TextView = findViewById(R.id.txtDataFpago)
+
         val adapter = ArrayAdapter(
             this,
             android.R.layout.simple_spinner_item,
@@ -193,6 +199,13 @@ class RaciboPagoActivity : AppCompatActivity() {
 
         val btnPagar: Button = findViewById(R.id.btnPagar)
         btnPagar.setOnClickListener(){
+            if(txt1 == true && txt2 == true && txt3 == true){
+                btnCrearValid = true
+            } else {
+                btnCrearValid = false
+                showPopup(this, "Campos incompletos")
+                return@setOnClickListener
+            }
             val numeroTarjeta = etNumeroTarjeta.text.toString()
 
             enviarPago(
@@ -201,9 +214,17 @@ class RaciboPagoActivity : AppCompatActivity() {
                 mesesPagados = tvData4.text.toString().toInt(),
                 fkCuenta = tvData3.text.toString().toInt(),
                 fkTarjeta = numeroTarjeta
-            ) { mensaje ->
-                // Manejar la respuesta en la interfaz de usuario
-                Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
+            ) { resultado ->
+                if (resultado.mensaje == "1"){
+                    showPopupSuccess(this, "Tarjeta guardada")
+
+                    txtDataFpago.text = obtenerFechaActual()
+                    txDataTransaccion.text = resultado.transaccion
+                    txDataEstado.text = "Liquidado"
+
+                } else {
+                    showPopup(this, resultado.mensaje)
+                }
             }
         }
     }

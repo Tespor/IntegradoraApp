@@ -15,6 +15,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import java.text.SimpleDateFormat
+import java.util.*
 
 //Funcion para ocultar o ver contraseñas
 fun VerOcultarPass (btnVer: ImageButton, txtPass: EditText, passVisible: Boolean): Boolean{
@@ -59,6 +61,12 @@ fun showPopupSuccess(context: Context, mensaje: String) {
     val toast = Toast(context)
     toast.view = layout
     toast.show()
+}
+
+fun obtenerFechaActual(): String {
+    val formato = SimpleDateFormat("dd/MM/yy") // Formato de fecha deseado
+    val fechaActual = Date() // Fecha actual
+    return formato.format(fechaActual) // Formatea la fecha
 }
 
 class Utils {

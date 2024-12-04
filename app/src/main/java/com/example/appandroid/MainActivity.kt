@@ -103,8 +103,13 @@ class MainActivity : AppCompatActivity() {
                             txtConsumoPromedio.text = CuentaDatos.consumoPromedio
                             txtProximoVencimiento.text = CuentaDatos.proximoVencimiento
                             txtTipoContrato.text = CuentaDatos.tipoContrato
-                            txtAdeudoTotal.text = CuentaDatos.adeudoTotal
                             txtNombre.text = CuentaDatos.nombreCompleto
+                            if (CuentaDatos.adeudoTotal == "" || CuentaDatos.adeudoTotal == null || CuentaDatos.adeudoTotal == "null" || CuentaDatos.adeudoTotal.isNullOrEmpty()){
+                                txtAdeudoTotal.text = "0.00"
+                            } else {
+                                txtAdeudoTotal.text = CuentaDatos.adeudoTotal
+                            }
+
                         } else {
                             println("No se obtuvieron datos de la cuenta.")
                         }

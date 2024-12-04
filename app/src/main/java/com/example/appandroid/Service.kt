@@ -23,8 +23,8 @@ import org.json.JSONException
 import java.net.URL
 
 //const val url_base: String = "http://192.168.137.124/Integradora/";//Utt
-const val url_base: String = "http://192.168.117.151/Integradora/";//Casa
-//const val url_base: String = "http://192.168.0.104/Integradora/";//Chamba
+//const val url_base: String = "http://192.168.117.151/Integradora/";//Casa
+const val url_base: String = "http://192.168.0.104/Integradora/";//Chamba
 const val sub_url: String = "${url_base}clientePhp/";
 
 object Endpoints {
@@ -556,19 +556,22 @@ fun registrarTarjeta(
     })
 }
 
-
+data class PagoCallBack(
+    val mensaje: String,
+    val transaccion: String
+)
 fun enviarPago(
     context: Context,
     monto: Double,
     mesesPagados: Int,
     fkCuenta: Int,
     fkTarjeta: String,
-    respuesta: (String) -> Unit
+    callback: (PagoCallBack) -> Unit
 ) {
     // Validar los campos
     if (monto <= 0 || mesesPagados <= 0 || fkCuenta <= 0 || fkTarjeta.isEmpty()) {
         (context as Activity).runOnUiThread {
-            respuesta("Todos los campos deben ser válidos y no estar vacíos")
+            callback(PagoCallBack("Todos los campos deben ser válidos y no estar vacíos", ""))
         }
         return
     }
@@ -597,7 +600,7 @@ fun enviarPago(
         override fun onFailure(call: Call, e: IOException) {
             e.printStackTrace()
             (context as Activity).runOnUiThread {
-                respuesta("Error de conexión: ${e.message}")
+                callback(PagoCallBack("Error de conexión: ${e.message}", ""))
             }
         }
 
@@ -614,26 +617,27 @@ fun enviarPago(
                         (context as Activity).runOnUiThread {
                             if (status == 1) {
                                 println(message)
-                                respuesta("Pago registrado exitosamente: ${jsonResponse.getString("transaccion")}")
+                                //respuesta("Pago registrado exitosamente: ${jsonResponse.getString("transaccion")}")
+                                callback(PagoCallBack("1",jsonResponse.getString("transaccion")))
                             } else {
                                 println("Error al registrar el pago: $message")
-                                respuesta("Error: $message")
+                                callback(PagoCallBack("Error: $message", ""))
                             }
                         }
                     } else {
                         (context as Activity).runOnUiThread {
-                            respuesta("Respuesta inesperada del servidor: clave 'status' no encontrada")
+                            callback(PagoCallBack("Respuesta inesperada del servidor: clave 'status' no encontrada", ""))
                         }
                     }
                 } catch (e: JSONException) {
                     e.printStackTrace()
                     (context as Activity).runOnUiThread {
-                        respuesta("Error al procesar la respuesta JSON")
+                        callback(PagoCallBack("Error al procesar la respuesta JSON", ""))
                     }
                 }
             } else {
                 (context as Activity).runOnUiThread {
-                    respuesta("Respuesta vacía del servidor")
+                    callback(PagoCallBack("Respuesta vacía del servidor", ""))
                 }
             }
         }
