@@ -23,7 +23,7 @@ import org.json.JSONException
 import java.net.URL
 
 //const val url_base: String = "http://192.168.137.124/Integradora/";//Utt
-const val url_base: String = "http://192.168.1.13/Integradora/";//Casa
+const val url_base: String = "http://192.168.117.151/Integradora/";//Casa
 //const val url_base: String = "http://192.168.0.104/Integradora/";//Chamba
 const val sub_url: String = "${url_base}clientePhp/";
 
@@ -34,6 +34,7 @@ object Endpoints {
     const val datosCuenta = "${sub_url}datosCuenta.php"
     const val obtenerCuentas = "${sub_url}obtenerCuentas.php"
     const val registrarCuentas = "${sub_url}registrarCuentas.php"
+    const val pagos = "${sub_url}Pagos.php"
 }
 
 var IdDeUsuario = "";
@@ -554,6 +555,91 @@ fun registrarTarjeta(
         }
     })
 }
+
+
+fun enviarPago(
+    context: Context,
+    monto: Double,
+    mesesPagados: Int,
+    fkCuenta: Int,
+    fkTarjeta: String,
+    respuesta: (String) -> Unit
+) {
+    // Validar los campos
+    if (monto <= 0 || mesesPagados <= 0 || fkCuenta <= 0 || fkTarjeta.isEmpty()) {
+        (context as Activity).runOnUiThread {
+            respuesta("Todos los campos deben ser válidos y no estar vacíos")
+        }
+        return
+    }
+
+    val client = OkHttpClient()
+
+    // Crear el JSON de los datos a enviar
+    val jsonObject = JSONObject()
+    jsonObject.put("monto", monto)
+    jsonObject.put("meses_pagados", mesesPagados)
+    jsonObject.put("fk_cuenta", fkCuenta)
+    jsonObject.put("fk_tarjeta", fkTarjeta)
+
+    // Crear el cuerpo de la solicitud en formato JSON
+    val requestBody = jsonObject.toString().toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+
+    // Crear la solicitud POST
+    val request = Request.Builder()
+        .url(Endpoints.pagos)
+        .post(requestBody)
+        .addHeader("Content-Type", "application/json")
+        .build()
+
+    // Realizar la solicitud
+    client.newCall(request).enqueue(object : Callback {
+        override fun onFailure(call: Call, e: IOException) {
+            e.printStackTrace()
+            (context as Activity).runOnUiThread {
+                respuesta("Error de conexión: ${e.message}")
+            }
+        }
+
+        override fun onResponse(call: Call, response: Response) {
+            val responseData = response.body?.string()
+            if (responseData != null) {
+                println("Respuesta del servidor: $responseData") // Para depuración
+                try {
+                    val jsonResponse = JSONObject(responseData)
+                    if (jsonResponse.has("status")) {
+                        val status = jsonResponse.getInt("status")
+                        val message = jsonResponse.getString("message")
+
+                        (context as Activity).runOnUiThread {
+                            if (status == 1) {
+                                println(message)
+                                respuesta("Pago registrado exitosamente: ${jsonResponse.getString("transaccion")}")
+                            } else {
+                                println("Error al registrar el pago: $message")
+                                respuesta("Error: $message")
+                            }
+                        }
+                    } else {
+                        (context as Activity).runOnUiThread {
+                            respuesta("Respuesta inesperada del servidor: clave 'status' no encontrada")
+                        }
+                    }
+                } catch (e: JSONException) {
+                    e.printStackTrace()
+                    (context as Activity).runOnUiThread {
+                        respuesta("Error al procesar la respuesta JSON")
+                    }
+                }
+            } else {
+                (context as Activity).runOnUiThread {
+                    respuesta("Respuesta vacía del servidor")
+                }
+            }
+        }
+    })
+}
+
 
 
 

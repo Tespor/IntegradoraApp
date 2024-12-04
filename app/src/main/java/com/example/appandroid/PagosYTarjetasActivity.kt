@@ -26,6 +26,26 @@ class PagosYTarjetasActivity : AppCompatActivity() {
         val tvVencimiento: TextView = findViewById(R.id.tvVencimiento)
         val tvNombre: TextView = findViewById(R.id.tvNombre)
 
+        // Recuperar el valor del Intent
+        // Recuperar valores del Intent
+        val numeroCuenta = intent.getIntExtra("numeroCuenta", -1) // Valor por defecto: -1
+        val mesesAduedo = intent.getIntExtra("mesesAduedo", -1)   // Valor por defecto: -1
+        val totalAdeudo = intent.getFloatExtra("Total", -1f)      // Valor por defecto: -1f
+
+        // Validar que los valores sean mayores a 0
+        if (numeroCuenta > 0 && mesesAduedo > 0 && totalAdeudo > 0) {
+            // Valores válidos
+            println("Número de cuenta: $numeroCuenta")
+            println("Meses de adeudo: $mesesAduedo")
+            println("Total adeudo: $totalAdeudo")
+        } else {
+            // Valores inválidos: mostrar un mensaje o manejar el error
+            println("Error: Uno o más valores no son válidos.")
+            if (numeroCuenta <= 0) println("Número de cuenta inválido.")
+            if (mesesAduedo <= 0) println("Meses de adeudo inválido.")
+            if (totalAdeudo <= 0) println("Total adeudo inválido.")
+        }
+
 
         //=======================================================================//
         //                Sacar las cuentas y llenar el spinner                  //
@@ -364,6 +384,18 @@ class PagosYTarjetasActivity : AppCompatActivity() {
 
                 "PAGAR" -> {
 
+                    val textoSeleccionado = spinnerTarjetas.selectedItem.toString()
+
+                    enviarPago(
+                        context = this,
+                        monto = totalAdeudo.toDouble(),
+                        mesesPagados = mesesAduedo,
+                        fkCuenta = numeroCuenta,
+                        fkTarjeta = textoSeleccionado
+                    ) { mensaje ->
+                        // Manejar la respuesta en la interfaz de usuario
+                        Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
+                    }
                 }
                 else -> showPopupSuccess(this, "No Funciona")
             }

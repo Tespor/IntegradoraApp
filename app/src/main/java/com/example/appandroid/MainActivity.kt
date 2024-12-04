@@ -193,10 +193,13 @@ class MainActivity : AppCompatActivity() {
 
         val btnPagar = findViewById<Button>(R.id.btnPagar)
         btnPagar.setOnClickListener(){
+            val numeroSeleccionado = SpinCuentas.selectedItem.toString().toInt()
             val intentPagar = Intent(this, PagosYTarjetasActivity::class.java)
+            intentPagar.putExtra("numeroCuenta", numeroSeleccionado)
+            intentPagar.putExtra("mesesAduedo", txtMesesAdeudados.text.toString().toInt())
+            intentPagar.putExtra("Total", txtAdeudoTotal.text.toString().toFloat())
             startActivity(intentPagar)
         }
-
     }
 
     private fun irACrearCuenta(){
